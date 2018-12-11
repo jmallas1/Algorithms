@@ -1,12 +1,19 @@
 package football;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+    static Integer SAFETY = 2;
+    static Integer FIELDGOAL = 3;
+    static Integer TDXPT = 7;
+
     private static int count = 0;
     public static void main(String[] args) {
         long reference=System.nanoTime();
         int score = getNumberFromUser();
+
+        System.out.println(findEasyScores(score));
         for (int c=0;c < score; c++) {
             for (int x=0;x < score; x++) {
                 for (int t=0;t < score; t++) {
@@ -52,5 +59,34 @@ public class Main {
                                             ((c > 0)?c + " Touchdowns with Two Point Conversion ":"");
             System.out.println(wayScoreWasAchieved);
         }
+    }
+
+    public static String findEasyScores(int score)
+    {
+        // table[i] will store count of solutions for
+        // value i.
+        int table[] = new int[score + 1], i;
+
+        // Initialize all table values as 0
+        Arrays.fill(table, 0);
+
+        // Base case (If given value is 0)
+        table[0] = 1;
+
+        // One by one consider given 3
+        // moves and update the table[]
+        // values after the index greater
+        // than or equal to the value of
+        // the picked move
+        for (i = TDXPT; i <= score; i++)
+            table[i] += table[i - TDXPT];
+        for (i = FIELDGOAL; i <= score; i++)
+            table[i] += table[i - FIELDGOAL];
+        for (i = SAFETY; i <= score; i++)
+            table[i] += table[i - SAFETY];
+
+        // return table[score];
+
+        return table.toString();
     }
 }

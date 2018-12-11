@@ -7,17 +7,22 @@ public class Main
     static String seed1 = "0";
     static String seed2 = "1";
     static String word = seed1+seed2;
-    int iterations = 10;
+    static int iterations = 10;
+
     public static void main(String[] args)
     {
-
-        System.out.println(word);
+        alterWord();
     }
 
-    void alterWord(String theWord)
+    static void alterWord()
     {
         iterations--;
-        word += theWord.substring(word.length()-2, word.length());
+        if(iterations >0)
+        {
+            word += word.substring(word.length()-2, word.length());
+            System.out.println(word);
+            alterWord();
+        }
 
     }
 }
