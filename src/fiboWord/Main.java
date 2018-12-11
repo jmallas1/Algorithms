@@ -4,9 +4,9 @@ package fiboWord;
 
 public class Main
 {
-    static String seed1 = "0";
-    static String seed2 = "1";
-    static String word = seed1+seed2;
+    static String seq1 = "0";
+    static String seq2 = "1";
+    static String word = "";
     static int iterations = 10;
 
     public static void main(String[] args)
@@ -19,8 +19,11 @@ public class Main
         iterations--;
         if(iterations >0)
         {
-            word += word.substring(word.length()-2, word.length());
+            word += seq1;
+            word += seq2;
             System.out.println(word);
+            seq1 = seq2;
+            seq2 = word;
             alterWord();
         }
 
